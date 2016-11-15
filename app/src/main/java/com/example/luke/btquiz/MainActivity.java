@@ -8,7 +8,7 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    int i = 0;
+    int i = 5;
 
 
     private Button student;
