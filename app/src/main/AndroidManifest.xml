@@ -18,7 +18,8 @@
         <activity android:name=".FacultyConnect" />
         <activity android:name=".StudentActivity" />
         <activity android:name=".StudentConnect" />
-        <activity android:name=".Quiz"></activity>
+        <activity android:name=".Quiz" />
+        <activity android:name=".CreateQuiz"></activity>
     </application>
 
 </manifest>
