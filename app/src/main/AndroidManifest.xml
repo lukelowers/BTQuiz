@@ -15,11 +15,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <uses-permission android:name="android.permission.BLUETOOTH" />
+        <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
         <activity android:name=".FacultyConnect" />
         <activity android:name=".StudentActivity" />
         <activity android:name=".StudentConnect" />
         <activity android:name=".Quiz" />
-        <activity android:name=".CreateQuiz"></activity>
+        <activity android:name=".CreateQuiz"/>
     </application>
 
 </manifest>

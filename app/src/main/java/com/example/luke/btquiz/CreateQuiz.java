@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 public class CreateQuiz extends AppCompatActivity {
 
-    int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
