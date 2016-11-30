@@ -19,7 +19,8 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:layout_marginBottom="20dp">
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -38,13 +39,16 @@
         android:layout_alignBottom="@+id/checkBox1"
         android:layout_alignLeft="@+id/question2"
         android:layout_alignStart="@+id/question2"
-        android:textSize="14dp" />
+        android:textSize="14dp"
+        android:layout_marginBottom="10dp"
+        android:paddingBottom="15dp" />
                 </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="20dp">
 
         <CheckBox
             android:layout_width="wrap_content"
@@ -63,14 +67,17 @@
         android:layout_alignBottom="@+id/checkBox2"
         android:layout_toRightOf="@+id/checkBox2"
         android:layout_toEndOf="@+id/checkBox2"
-        android:textSize="14dp" />
+        android:textSize="14dp"
+            android:layout_marginBottom="10dp"
+            android:paddingBottom="15dp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="20dp">
 
         <CheckBox
         android:layout_width="wrap_content"
@@ -89,13 +96,16 @@
             android:layout_below="@+id/checkBox2"
             android:layout_alignLeft="@+id/question2"
             android:layout_alignStart="@+id/question2"
-            android:textSize="14dp" />
+            android:textSize="14dp"
+            android:layout_marginBottom="10dp"
+            android:paddingBottom="15dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="20dp">
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -103,7 +113,8 @@
         android:layout_alignTop="@+id/question4"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:text="Make Your Own Question" />
+        android:text="Make Your Own Question"
+        android:textColor="?android:attr/textColorHint" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -116,60 +127,77 @@
         android:layout_below="@+id/checkBox3"
         android:layout_toRightOf="@+id/checkBox4"
         android:layout_toEndOf="@+id/checkBox4"
-        android:hint="Enter Question" />
+        android:hint="Enter Question"
+        android:paddingBottom="15dp"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="15dp"
+        android:focusable="false" />
 
         <EditText
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="A. "
             android:ems="4"
             android:id="@+id/answerA"
             android:textSize="14dp"
             android:editable="true"
             android:layout_below="@+id/question4"
             android:layout_alignLeft="@+id/question4"
-            android:layout_alignStart="@+id/question4" />
+            android:layout_alignStart="@+id/question4"
+            android:textColor="?android:attr/textColorHint"
+            android:layout_marginLeft="40dp"
+            android:hint="A. "
+            android:layout_width="200dp"
+            android:focusable="false" />
 
         <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="B. "
-        android:ems="4"
+            android:ems="4"
         android:id="@+id/answerB"
         android:textSize="14sp"
         android:layout_below="@+id/question4"
         android:layout_alignRight="@+id/answerCorrect"
-        android:layout_alignEnd="@+id/answerCorrect" />
+        android:layout_alignEnd="@+id/answerCorrect"
+            android:textColor="?android:attr/textColorHint"
+            android:layout_marginLeft="40dp"
+            android:hint="B.  "
+            android:layout_width="200dp"
+            android:focusable="false" />
 
         <EditText
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="C. "
             android:ems="4"
             android:id="@+id/answerC"
             android:textSize="14sp"
             android:layout_below="@+id/question4"
             android:layout_toRightOf="@+id/question4"
-            android:layout_toEndOf="@+id/question4" />
+            android:layout_toEndOf="@+id/question4"
+            android:textColor="?android:attr/textColorHint"
+            android:layout_marginLeft="40dp"
+            android:hint="C. "
+            android:layout_width="200dp"
+            android:focusable="false" />
 
         <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="D. "
-        android:ems="4"
+            android:ems="4"
         android:id="@+id/answerD"
         android:textSize="14sp"
             android:layout_alignBaseline="@+id/answerC"
         android:layout_alignBottom="@+id/answerC"
         android:layout_toRightOf="@+id/answerC"
-        android:layout_toEndOf="@+id/answerC" />
+        android:layout_toEndOf="@+id/answerC"
+            android:textColor="?android:attr/textColorHint"
+            android:layout_marginLeft="40dp"
+            android:hint="D. "
+            android:layout_width="200dp"
+            android:focusable="false" />
 
         <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="145dp"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
@@ -180,7 +208,10 @@
         android:layout_below="@+id/answerA"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+            android:layout_marginLeft="50dp"
+            android:textStyle="normal|italic"
+            android:focusable="false" />
 
     </LinearLayout>
 

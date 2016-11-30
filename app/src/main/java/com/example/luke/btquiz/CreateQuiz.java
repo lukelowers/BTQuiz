@@ -1,5 +1,7 @@
 package com.example.luke.btquiz;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -9,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CreateQuiz extends AppCompatActivity {
 
@@ -45,11 +48,11 @@ public class CreateQuiz extends AppCompatActivity {
         checkBox4 = (CheckBox) findViewById(R.id.checkBox4);
 
         //Add section to fill questions
-        String questionString = question1String +"<br><br><b>A. 1</b>  B. 2   C. 3   D. 4";
+        String questionString = question1String +"<br><br><b>A. 1</b>    B. 2     C. 3     D. 4";
         question1.setText(Html.fromHtml(questionString));
-        questionString = question2String +"<br><br>A. 1   <b>B. 2</b>   C. 3   D. 4";
+        questionString = question2String +"<br><br>A. 1     <b>B. 2</b>     C. 3     D. 4";
         question2.setText(Html.fromHtml(questionString));
-        questionString = question3String +"<br><br>A. 1   B. 2   <b>C. 3</b>   D. 4";
+        questionString = question3String +"<br><br>A. 1     B. 2     <b>C. 3</b>     D. 4";
         question3.setText(Html.fromHtml(questionString));
 
 
@@ -72,8 +75,19 @@ public class CreateQuiz extends AppCompatActivity {
                     quiz2Send += myoQuestion + myoAnswer;
                 }
 
-                //send quiz info over to student
-                Log.e("",quiz2Send);
+                //Log.e("",quiz2Send);
+
+                Context c = getApplicationContext();
+                Toast.makeText(c,"Quiz successfully created",Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(CreateQuiz.this, FacultyConnect.class);
+                intent.putExtra("quiz",quiz2Send);
+                startActivity(intent);
+
+                /* To get the quiz string from the intent in FacultyConnect.java
+                Bundle bundle = getIntent().getExtras();
+                String quiz = bundle.getString("quiz");
+                 */
 
             }
         });
