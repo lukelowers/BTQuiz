@@ -45,11 +45,11 @@ public class CreateQuiz extends AppCompatActivity {
         checkBox4 = (CheckBox) findViewById(R.id.checkBox4);
 
         //Add section to fill questions
-        String questionString = question1String +"\n<b>A. 1</b>  B. 2   C. 3   D. 4";
+        String questionString = question1String +"<br><br><b>A. 1</b>  B. 2   C. 3   D. 4";
         question1.setText(Html.fromHtml(questionString));
-        questionString = question2String +"\nA. 1   <b>B. 2</b>   C. 3   D. 4";
+        questionString = question2String +"<br><br>A. 1   <b>B. 2</b>   C. 3   D. 4";
         question2.setText(Html.fromHtml(questionString));
-        questionString = question3String +"\nA. 1   B. 2   <b>C. 3</b>   D. 4";
+        questionString = question3String +"<br><br>A. 1   B. 2   <b>C. 3</b>   D. 4";
         question3.setText(Html.fromHtml(questionString));
 
 
