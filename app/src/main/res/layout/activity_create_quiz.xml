@@ -2,18 +2,24 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-<RelativeLayout
-    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
     android:id="@+id/activity_create_quiz"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    tools:context="com.example.luke.btquiz.CreateQuiz"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.luke.btquiz.CreateQuiz">
+    >
+
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    android:orientation="vertical">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -33,37 +39,22 @@
         android:layout_alignLeft="@+id/question2"
         android:layout_alignStart="@+id/question2"
         android:textSize="14dp" />
+                </LinearLayout>
 
-    <TextView
-        android:text="Question 3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/question3"
-        android:layout_below="@+id/checkBox2"
-        android:layout_alignLeft="@+id/question2"
-        android:layout_alignStart="@+id/question2"
-        android:layout_marginTop="65dp"
-        android:textSize="14dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkBox3"
-        android:layout_alignBaseline="@+id/question3"
-        android:layout_alignBottom="@+id/question3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkBox2"
+            android:layout_below="@+id/checkBox1"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="99dp"
-        android:id="@+id/checkBox2"
-        android:layout_below="@+id/checkBox1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
+        <TextView
         android:text="Question 2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -74,79 +65,110 @@
         android:layout_toEndOf="@+id/checkBox2"
         android:textSize="14dp" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBox3"
+        android:layout_alignBaseline="@+id/question3"
+        android:layout_alignBottom="@+id/question3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="Question 3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/question3"
+            android:layout_below="@+id/checkBox2"
+            android:layout_alignLeft="@+id/question2"
+            android:layout_alignStart="@+id/question2"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/checkBox4"
         android:layout_alignTop="@+id/question4"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="A. "
-        android:ems="4"
-        android:layout_below="@+id/question4"
-        android:layout_alignLeft="@+id/question4"
-        android:layout_alignStart="@+id/question4"
-        android:id="@+id/answerA"
-        android:textSize="14dp"
-        android:editable="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="B. "
-        android:ems="4"
-        android:layout_below="@+id/question4"
-        android:layout_alignLeft="@+id/createQuizButton"
-        android:layout_alignStart="@+id/createQuizButton"
-        android:id="@+id/answerB"
-        android:textSize="14sp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="C. "
-        android:ems="4"
-        android:id="@+id/answerC"
-        android:textSize="14sp"
-        android:layout_alignBaseline="@+id/answerB"
-        android:layout_alignBottom="@+id/answerB"
-        android:layout_toRightOf="@+id/answerB"
-        android:layout_toEndOf="@+id/answerB" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="D. "
-        android:ems="6"
-        android:id="@+id/answerD"
-        android:textSize="14sp"
-        android:layout_alignBaseline="@+id/answerC"
-        android:layout_alignBottom="@+id/answerC"
-        android:layout_toEndOf="@+id/createQuizButton" />
+        android:layout_alignParentStart="true"
+        android:text="Make Your Own Question" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="text"
         android:ems="10"
-        android:layout_marginTop="58dp"
         android:id="@+id/question4"
         android:textSize="14dp"
         android:editable="true"
         android:layout_below="@+id/checkBox3"
         android:layout_toRightOf="@+id/checkBox4"
         android:layout_toEndOf="@+id/checkBox4"
-        android:hint="Make Your Own Question" />
+        android:hint="Enter Question" />
 
-    <EditText
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="A. "
+            android:ems="4"
+            android:id="@+id/answerA"
+            android:textSize="14dp"
+            android:editable="true"
+            android:layout_below="@+id/question4"
+            android:layout_alignLeft="@+id/question4"
+            android:layout_alignStart="@+id/question4" />
+
+        <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="B. "
+        android:ems="4"
+        android:id="@+id/answerB"
+        android:textSize="14sp"
+        android:layout_below="@+id/question4"
+        android:layout_alignRight="@+id/answerCorrect"
+        android:layout_alignEnd="@+id/answerCorrect" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="C. "
+            android:ems="4"
+            android:id="@+id/answerC"
+            android:textSize="14sp"
+            android:layout_below="@+id/question4"
+            android:layout_toRightOf="@+id/question4"
+            android:layout_toEndOf="@+id/question4" />
+
+        <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="D. "
+        android:ems="4"
+        android:id="@+id/answerD"
+        android:textSize="14sp"
+            android:layout_alignBaseline="@+id/answerC"
+        android:layout_alignBottom="@+id/answerC"
+        android:layout_toRightOf="@+id/answerC"
+        android:layout_toEndOf="@+id/answerC" />
+
+        <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
@@ -156,8 +178,11 @@
         android:textSize="14sp"
         android:hint="Answer Letter"
         android:layout_below="@+id/answerA"
-        android:layout_alignLeft="@+id/answerA"
-        android:layout_alignStart="@+id/answerA" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp" />
+
+    </LinearLayout>
 
     <Button
         android:text="Create Quiz"
@@ -165,11 +190,9 @@
         android:layout_height="match_parent"
         android:id="@+id/createQuizButton"
         android:layout_below="@+id/answerCorrect"
-        android:layout_toRightOf="@+id/question3"
-        android:layout_toEndOf="@+id/question3"
-        android:layout_marginLeft="12dp"
-        android:layout_marginStart="12dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp" />
 
-</RelativeLayout>
+    </LinearLayout>
 
 </ScrollView>
