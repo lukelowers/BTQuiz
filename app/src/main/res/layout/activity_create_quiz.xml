@@ -10,4 +10,159 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.luke.btquiz.CreateQuiz">
 
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/checkBox1" />
+
+    <TextView
+        android:text="Question 1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/question1"
+        android:layout_alignBaseline="@+id/checkBox1"
+        android:layout_alignBottom="@+id/checkBox1"
+        android:layout_alignLeft="@+id/question2"
+        android:layout_alignStart="@+id/question2" />
+
+    <TextView
+        android:text="Question 3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/question3"
+        android:layout_below="@+id/checkBox2"
+        android:layout_alignLeft="@+id/question2"
+        android:layout_alignStart="@+id/question2"
+        android:layout_marginTop="65dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBox3"
+        android:layout_alignBaseline="@+id/question3"
+        android:layout_alignBottom="@+id/question3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="99dp"
+        android:id="@+id/checkBox2"
+        android:layout_below="@+id/checkBox1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Question 2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/question2"
+        android:layout_alignBaseline="@+id/checkBox2"
+        android:layout_alignBottom="@+id/checkBox2"
+        android:layout_toRightOf="@+id/checkBox2"
+        android:layout_toEndOf="@+id/checkBox2" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBox4"
+        android:layout_alignTop="@+id/question4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="A. "
+        android:ems="4"
+        android:layout_below="@+id/question4"
+        android:layout_alignLeft="@+id/question4"
+        android:layout_alignStart="@+id/question4"
+        android:id="@+id/answerA"
+        android:textSize="14sp"
+        android:editable="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="B. "
+        android:ems="4"
+        android:layout_below="@+id/question4"
+        android:layout_alignLeft="@+id/createQuizButton"
+        android:layout_alignStart="@+id/createQuizButton"
+        android:id="@+id/answerB"
+        android:textSize="14sp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="C. "
+        android:ems="4"
+        android:id="@+id/answerC"
+        android:textSize="14sp"
+        android:layout_alignBaseline="@+id/answerB"
+        android:layout_alignBottom="@+id/answerB"
+        android:layout_toRightOf="@+id/answerB"
+        android:layout_toEndOf="@+id/answerB" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="D. "
+        android:ems="6"
+        android:id="@+id/answerD"
+        android:textSize="14sp"
+        android:layout_alignBaseline="@+id/answerC"
+        android:layout_alignBottom="@+id/answerC"
+        android:layout_toRightOf="@+id/createQuizButton"
+        android:layout_toEndOf="@+id/createQuizButton" />
+
+    <Button
+        android:text="Create Quiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/createQuizButton"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/question3"
+        android:layout_toEndOf="@+id/question3" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:layout_marginTop="58dp"
+        android:id="@+id/question4"
+        android:textSize="14sp"
+        android:editable="true"
+        android:layout_below="@+id/checkBox3"
+        android:layout_toRightOf="@+id/checkBox4"
+        android:layout_toEndOf="@+id/checkBox4"
+        android:hint="Make Your Own Question" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_above="@+id/createQuizButton"
+        android:layout_alignLeft="@+id/answerA"
+        android:layout_alignStart="@+id/answerA"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:id="@+id/answerCorrect"
+        android:editable="true"
+        android:textSize="14sp"
+        android:hint="Answer" />
+
 </RelativeLayout>
