@@ -18,9 +18,6 @@ public class Quiz extends AppCompatActivity {
     BluetoothAdapter mBluetoothAdapter;
     Intent discoverableIntent;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
