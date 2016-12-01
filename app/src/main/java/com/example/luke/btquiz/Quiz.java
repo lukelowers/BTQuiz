@@ -181,7 +181,7 @@ public class Quiz extends AppCompatActivity {
             answer4 = parts[5];
         }
 
-        tabHost.setVisibility(View.GONE); //Starts out invisible
+        //tabHost.setVisibility(View.GONE); //Starts out invisible
 
     }//end splitIntoQuiz
 
@@ -199,7 +199,7 @@ public class Quiz extends AppCompatActivity {
         startActivity(discoverableIntent);
 
         //The tabs are suppose to by added as you add questions but it's not working for more than 2 questions right now.
-        String receivedMessage = "How many sides are there in a square?:1:2:3:4:4,Select the fastest animal:Hippo:Giraffe:Cheeta:Mouse Rat:Cheeta";//,How many feet are on a football field?:50:100:300:330:330";
+        String receivedMessage = "How many sides are there in a square?:1:2:3:4:4,Select the fastest animal:Hippo:Giraffe:Cheeta:Mouse Rat:Cheeta,How many feet are on a football field?:50:100:300:330:330";
         setupQuiz(receivedMessage);
 
         b.setOnClickListener(new View.OnClickListener() { //start quiz button listener
@@ -287,5 +287,5 @@ public class Quiz extends AppCompatActivity {
             } catch (IOException e) { }
         }
     }
-    
+
 }
