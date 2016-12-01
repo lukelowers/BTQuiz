@@ -5,10 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.bluetooth.BluetoothAdapter;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -31,27 +29,37 @@ public class Quiz extends AppCompatActivity {
     public int numOfQuestions;
     BluetoothAdapter mBluetoothAdapter;
 
-
     public String scoreQuiz(){//start scoreQuiz
         double correct = 0;
 
-        userAnswer1 = ((RadioButton)findViewById(answers1.getCheckedRadioButtonId())).getText().toString();
-
+        if(answers1.getCheckedRadioButtonId() != -1)
+            userAnswer1 = ((RadioButton)findViewById(answers1.getCheckedRadioButtonId())).getText().toString();
+        else
+            userAnswer1 = "";
         if(answer1.equals(userAnswer1))
             correct += 1;
         if(answer2 != null) {
-            userAnswer2 = ((RadioButton)findViewById(answers2.getCheckedRadioButtonId())).getText().toString();
+            if(answers2.getCheckedRadioButtonId() != -1)
+                userAnswer2 = ((RadioButton)findViewById(answers2.getCheckedRadioButtonId())).getText().toString();
+            else
+                userAnswer2 = "";
             if (answer2.equals(userAnswer2))
                 correct += 1;
         }
         if(answer3 != null) {
-            userAnswer3 = ((RadioButton) findViewById(answers3.getCheckedRadioButtonId())).getText().toString();
+            if(answers3.getCheckedRadioButtonId() != -1)
+                userAnswer3 = ((RadioButton) findViewById(answers3.getCheckedRadioButtonId())).getText().toString();
+            else
+                userAnswer3 = "";
             if (answer3.equals(userAnswer3))
                 correct += 1;
         }
         if(answer4 != null)
         {
-            userAnswer4 = ((RadioButton)findViewById(answers4.getCheckedRadioButtonId())).getText().toString();
+            if(answers4.getCheckedRadioButtonId() != -1)
+                userAnswer4 = ((RadioButton)findViewById(answers4.getCheckedRadioButtonId())).getText().toString();
+            else
+                userAnswer4 = "";
             if(answer4.equals(userAnswer4))
                 correct += 1;
         }
@@ -74,7 +82,6 @@ public class Quiz extends AppCompatActivity {
         titleText = (TextView) findViewById(R.id.titleText);
         b = (Button) findViewById(R.id.button);
         mainMenuB = (Button) findViewById(R.id.mainMenuB);
-
         mainMenuB.setVisibility(View.GONE); //Starts out invisible
     }//end setUpActivity
 
@@ -108,7 +115,7 @@ public class Quiz extends AppCompatActivity {
         d1.setText(parts[4]);
         answer1 = parts[5];
 
-        if(numOfQuestions == 2) {
+        if(numOfQuestions >= 2) {
             answers2 = (RadioGroup)findViewById(R.id.answers2);
             spec = tabHost.newTabSpec("Q2");
             spec.setContent(R.id.Q2);
@@ -131,7 +138,7 @@ public class Quiz extends AppCompatActivity {
             answer2 = parts[5];
         }
 
-        if(numOfQuestions == 3) {
+        if(numOfQuestions >= 3) {
             answers3 = (RadioGroup)findViewById(R.id.answers3);
             spec = tabHost.newTabSpec("Q3");
             spec.setContent(R.id.Q3);
@@ -154,7 +161,7 @@ public class Quiz extends AppCompatActivity {
             answer3 = parts[5];
         }
 
-        if(numOfQuestions == 4) {
+        if(numOfQuestions >= 4) {
             answers4 = (RadioGroup)findViewById(R.id.answers4);
             spec = tabHost.newTabSpec("Q4");
             spec.setContent(R.id.Q4);
@@ -178,7 +185,6 @@ public class Quiz extends AppCompatActivity {
         }
 
         tabHost.setVisibility(View.GONE); //Starts out invisible
-
     }//end splitIntoQuiz
 
     @Override
@@ -194,8 +200,9 @@ public class Quiz extends AppCompatActivity {
         discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
         startActivity(discoverableIntent);
 
+        //This is the string that you get from faculty
         //The tabs are suppose to by added as you add questions but it's not working for more than 2 questions right now.
-        String receivedMessage = "How many sides are there in a square?:1:2:3:4:4,Select the fastest animal:Hippo:Giraffe:Cheeta:Mouse Rat:Cheeta";//,How many feet are on a football field?:50:100:300:330:330";
+        String receivedMessage = "How many sides are there in a square?:1:2:3:4:4,Select the fastest animal:Hippo:Giraffe:Cheeta:Mouse Rat:Cheeta,How many feet are on a football field?:50:100:300:330:330,How many pairs are in 10?:2:4:6:5:5";
         setupQuiz(receivedMessage);
 
         b.setOnClickListener(new View.OnClickListener() { //start quiz button listener
@@ -222,14 +229,11 @@ public class Quiz extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //This button can be used to send the results back to the prof
+                Context c = getApplicationContext();
+                Toast.makeText(c, "Quiz submitted", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(Quiz.this, MainActivity.class);
                 startActivity(intent);
             }
         });//mainMenuB onClickListener
-
-
     }//end onCreate
-
-
-    
 }

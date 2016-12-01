@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 public class CreateQuiz extends AppCompatActivity {
 
-
     //Declare Variables
     public Button createQuizButton;
     public TextView question1, question2, question3;
@@ -64,7 +63,6 @@ public class CreateQuiz extends AppCompatActivity {
         question2.setText(Html.fromHtml(questionString));
         questionString = question3String +"<br><br>A. 1     B. 2     <b>C. 3</b>     D. 4";
         question3.setText(Html.fromHtml(questionString));
-
 
         aRadio.setOnClickListener(new View.OnClickListener() { //start aRadio onClick
             @Override
@@ -120,10 +118,6 @@ public class CreateQuiz extends AppCompatActivity {
                 if(b)
                 {
                     question4.setClickable(true);
-//                    answerA.setClickable(true);
-//                    answerB.setClickable(true);
-//                    answerC.setClickable(true);
-//                    answerD.setClickable(true);
                     aRadio.setClickable(true);
                     bRadio.setClickable(true);
                     cRadio.setClickable(true);
@@ -131,15 +125,11 @@ public class CreateQuiz extends AppCompatActivity {
                 }
                 else
                 {
-                        question4.setClickable(false);
-//                        answerA.setClickable(false);
-//                        answerB.setClickable(false);
-//                        answerC.setClickable(false);
-//                        answerD.setClickable(false);
-                        aRadio.setClickable(false);
-                        bRadio.setClickable(false);
-                        cRadio.setClickable(false);
-                        dRadio.setClickable(false);
+                    question4.setClickable(false);
+                    aRadio.setClickable(false);
+                    bRadio.setClickable(false);
+                    cRadio.setClickable(false);
+                    dRadio.setClickable(false);
                 }
                 makeYourOwn = b;
 
@@ -186,8 +176,6 @@ public class CreateQuiz extends AppCompatActivity {
 
                     quiz2Send += myoQuestion + myoAnswer;
                 }
-
-                //Log.e("",quiz2Send);
 
                 Context c = getApplicationContext();
                 if(continueOn) {
