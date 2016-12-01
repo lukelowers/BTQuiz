@@ -53,7 +53,7 @@ public class ConnectService {
                 // If a connection was accepted
                 if (socket != null) {
                     // Do work to manage the connection (in a separate thread)
-                    manageConnectedSocket(socket);
+                    //manageConnectedSocket(socket);
                     try {
                         mmServerSocket.close();
                     } catch (IOException e) {
@@ -123,7 +123,7 @@ public class ConnectService {
             }
 
             // Do work to manage the connection (in a separate thread)
-            manageConnectedSocket(mmSocket);
+            //manageConnectedSocket(mmSocket);
         }
 
         //TODO: call cancel when done with BluetoothSocket to clean up
@@ -171,7 +171,7 @@ public class ConnectService {
                     // Read from the InputStream
                     bytes = mmInStream.read(buffer);
                     // Send the obtained bytes to the UI activity
-                    mHandler.obtainMessage(MESSAGE_READ, bytes, -1, buffer).sendToTarget();
+                    //mHandler.obtainMessage(MESSAGE_READ, bytes, -1, buffer).sendToTarget();
                     }
                 catch (IOException e) {
                     break;
