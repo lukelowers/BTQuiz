@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,25 +31,37 @@ public class Quiz extends AppCompatActivity {
     public Button b, mainMenuB;
     public TabHost tabHost;
     String answer1, answer2, answer3, answer4, userAnswer1, userAnswer2, userAnswer3, userAnswer4;
+    public RadioGroup answers1,answers2,answers3,answers4;
     public int numOfQuestions;
     BluetoothAdapter mBluetoothAdapter;
 
 
     public String scoreQuiz(){//start scoreQuiz
         int correct = 0;
+
+        userAnswer1 = ((RadioButton)findViewById(answers1.getCheckedRadioButtonId())).getText().toString();
+
         if(answer1.equals(userAnswer1))
             correct += 1;
-        if(answer2 != null)
-            if(answer2.equals(userAnswer2))
+        if(answer2 != null) {
+            userAnswer2 = ((RadioButton)findViewById(answers2.getCheckedRadioButtonId())).getText().toString();
+            if (answer2.equals(userAnswer2))
                 correct += 1;
-        if(answer3 != null)
-            if(answer3.equals(userAnswer3))
+        }
+        if(answer3 != null) {
+            userAnswer3 = ((RadioButton) findViewById(answers3.getCheckedRadioButtonId())).getText().toString();
+            if (answer3.equals(userAnswer3))
                 correct += 1;
+        }
         if(answer4 != null)
+        {
+            userAnswer4 = ((RadioButton)findViewById(answers4.getCheckedRadioButtonId())).getText().toString();
             if(answer4.equals(userAnswer4))
                 correct += 1;
+        }
 
-        return String.valueOf(correct/numOfQuestions);
+        double perc = (correct/numOfQuestions) * 100;
+        return String.valueOf(perc) +"%"; //This returns 0.0 when the score doesn't equal 100%
     }//end scoreQuiz
 
     public void startQuiz()
@@ -73,10 +86,11 @@ public class Quiz extends AppCompatActivity {
     {//start splitIntoQuiz
         String[] questions = msg.split(",");
         numOfQuestions = questions.length;
-        Log.e(String.valueOf(numOfQuestions), "");
 
         tabHost = (TabHost) findViewById(R.id.tabHost);
         tabHost.setup();
+
+        answers1 = (RadioGroup)findViewById(R.id.answers1);
 
         TabHost.TabSpec spec = tabHost.newTabSpec("Q1");
         spec.setContent(R.id.Q1);
@@ -99,6 +113,7 @@ public class Quiz extends AppCompatActivity {
         answer1 = parts[5];
 
         if(numOfQuestions == 2) {
+            answers2 = (RadioGroup)findViewById(R.id.answers2);
             spec = tabHost.newTabSpec("Q2");
             spec.setContent(R.id.Q2);
             spec.setIndicator("Q2");
@@ -121,6 +136,7 @@ public class Quiz extends AppCompatActivity {
         }
 
         if(numOfQuestions == 3) {
+            answers3 = (RadioGroup)findViewById(R.id.answers3);
             spec = tabHost.newTabSpec("Q3");
             spec.setContent(R.id.Q3);
             spec.setIndicator("Q3");
@@ -143,6 +159,7 @@ public class Quiz extends AppCompatActivity {
         }
 
         if(numOfQuestions == 4) {
+            answers4 = (RadioGroup)findViewById(R.id.answers4);
             spec = tabHost.newTabSpec("Q4");
             spec.setContent(R.id.Q4);
             spec.setIndicator("Q4");
@@ -181,7 +198,8 @@ public class Quiz extends AppCompatActivity {
         discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
         startActivity(discoverableIntent);
 
-        String receivedMessage = "How many sides are there in a square?:1:2:3:4:4,Select the fastest animal:Hippo:Giraffe:Cheeta:Mouse Rat:Cheeta";
+        //The tabs are suppose to by added as you add questions but it's not working for more than 2 questions right now.
+        String receivedMessage = "How many sides are there in a square?:1:2:3:4:4,Select the fastest animal:Hippo:Giraffe:Cheeta:Mouse Rat:Cheeta";//,How many feet are on a football field?:50:100:300:330:330";
         setupQuiz(receivedMessage);
 
         b.setOnClickListener(new View.OnClickListener() { //start quiz button listener
@@ -246,7 +264,7 @@ public class Quiz extends AppCompatActivity {
                 // If a connection was accepted
                 if (socket != null) {
                     // Do work to manage the connection (in a separate thread)
-                    manageConnectedSocket(socket);
+                    //manageConnectedSocket(socket);
                     try {
                         mmServerSocket.close();
                     } catch (IOException e) {

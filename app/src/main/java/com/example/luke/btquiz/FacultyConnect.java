@@ -162,7 +162,7 @@ public class FacultyConnect extends AppCompatActivity {
                 }
 
             // Do work to manage the connection (in a separate thread)
-            manageConnectedSocket(mmSocket);
+            //manageConnectedSocket(mmSocket);
         }
 
         //TODO: call cancel when done with BluetoothSocket to clean up
