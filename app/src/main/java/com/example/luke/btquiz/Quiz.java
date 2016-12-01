@@ -14,11 +14,16 @@ import android.widget.RadioButton;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.bluetooth.BluetoothServerSocket;
+import java.io.IOException;
+import android.bluetooth.BluetoothSocket;
+import android.util.Log;
+import java.util.UUID;
 
 public class Quiz extends AppCompatActivity {
 
 
-    Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+    Intent discoverableIntent;
     public ProgressBar spinner;
     public TextView titleText, question1, question2, question3, question4;
     public RadioButton a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4, d1, d2, d3, d4;
@@ -26,6 +31,8 @@ public class Quiz extends AppCompatActivity {
     public TabHost tabHost;
     String answer1, answer2, answer3, answer4, userAnswer1, userAnswer2, userAnswer3, userAnswer4;
     public int numOfQuestions;
+    BluetoothAdapter mBluetoothAdapter;
+
 
     public String scoreQuiz(){//start scoreQuiz
         int correct = 0;
@@ -167,6 +174,10 @@ public class Quiz extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
         setUpActivity();
 
+        // enable discoverability
+        discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
         startActivity(discoverableIntent);
 
@@ -203,4 +214,65 @@ public class Quiz extends AppCompatActivity {
 
 
     }
+
+    //server device
+    private class AcceptThread extends Thread {
+
+        private final BluetoothServerSocket mmServerSocket;
+
+        public AcceptThread() {
+
+            UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
+
+            // Use a temporary object that is later assigned to mmServerSocket,
+            // because mmServerSocket is final
+            BluetoothServerSocket tmp = null;
+            try {
+                // uuid is the app's UUID string, also used by the client code
+                tmp = mBluetoothAdapter.listenUsingRfcommWithServiceRecord("BTQuiz", uuid);
+            } catch (IOException e) { }
+            mmServerSocket = tmp;
+        }
+
+        public void run() {
+            BluetoothSocket socket = null;
+            // Keep listening until exception occurs or a socket is returned
+            while (true) {
+                try {
+                    socket = mmServerSocket.accept();
+                } catch (IOException e) {
+                    break;
+                }
+                // If a connection was accepted
+                if (socket != null) {
+                    // Do work to manage the connection (in a separate thread)
+                    manageConnectedSocket(socket);
+                    try {
+                        mmServerSocket.close();
+                    } catch (IOException e) {
+                        Log.e("ERROR", "Was not in API example. " +
+                                "Added catch block bc of syntax error -> " +
+                                "unhandled exception: java.io.ioexception");
+                        e.printStackTrace();
+                    }
+                    break;
+                }
+            }
+        }
+
+        //TODO: call cancel when done with BluetoothSocket to clean up
+        // Will cancel the listening socket, and cause the thread to finish
+        public void cancel() {
+            try {
+                mmServerSocket.close();
+            } catch (IOException e) { }
+        }
+    }
+
+
+
+
+
+
+
 }
