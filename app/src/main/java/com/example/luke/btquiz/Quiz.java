@@ -66,7 +66,7 @@ public class Quiz extends AppCompatActivity {
     {//start splitIntoQuiz
         String[] questions = msg.split(",");
         numOfQuestions = questions.length;
-        Log.e(numOfQuestions, "");
+        Log.e(String.valueOf(numOfQuestions), "");
 
         tabHost = (TabHost) findViewById(R.id.tabHost);
         tabHost.setup();
