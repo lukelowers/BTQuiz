@@ -37,7 +37,7 @@ public class Quiz extends AppCompatActivity {
 
 
     public String scoreQuiz(){//start scoreQuiz
-        int correct = 0;
+        double correct = 0;
 
         userAnswer1 = ((RadioButton)findViewById(answers1.getCheckedRadioButtonId())).getText().toString();
 
@@ -186,7 +186,7 @@ public class Quiz extends AppCompatActivity {
     }//end splitIntoQuiz
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {//start onCreate
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
         setUpActivity();
@@ -225,13 +225,14 @@ public class Quiz extends AppCompatActivity {
         mainMenuB.setOnClickListener(new View.OnClickListener() {//mainMenuB onClickListener
             @Override
             public void onClick(View view) {
+                //This button can be used to send the results back to the prof
                 Intent intent = new Intent(Quiz.this, MainActivity.class);
                 startActivity(intent);
             }
         });//mainMenuB onClickListener
 
 
-    }
+    }//end onCreate
 
     //server device
     private class AcceptThread extends Thread {
@@ -286,11 +287,5 @@ public class Quiz extends AppCompatActivity {
             } catch (IOException e) { }
         }
     }
-
-
-
-
-
-
-
+    
 }
