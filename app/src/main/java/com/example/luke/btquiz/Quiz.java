@@ -5,10 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.bluetooth.BluetoothAdapter;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -30,7 +28,6 @@ public class Quiz extends AppCompatActivity {
     public RadioGroup answers1,answers2,answers3,answers4;
     public int numOfQuestions;
     BluetoothAdapter mBluetoothAdapter;
-
 
     public String scoreQuiz(){//start scoreQuiz
         double correct = 0;
@@ -85,7 +82,6 @@ public class Quiz extends AppCompatActivity {
         titleText = (TextView) findViewById(R.id.titleText);
         b = (Button) findViewById(R.id.button);
         mainMenuB = (Button) findViewById(R.id.mainMenuB);
-
         mainMenuB.setVisibility(View.GONE); //Starts out invisible
     }//end setUpActivity
 
@@ -189,7 +185,6 @@ public class Quiz extends AppCompatActivity {
         }
 
         tabHost.setVisibility(View.GONE); //Starts out invisible
-
     }//end splitIntoQuiz
 
     @Override
@@ -207,7 +202,7 @@ public class Quiz extends AppCompatActivity {
 
         //This is the string that you get from faculty
         //The tabs are suppose to by added as you add questions but it's not working for more than 2 questions right now.
-        String receivedMessage = "How many sides are there in a square?:1:2:3:4:4,Select the fastest animal:Hippo:Giraffe:Cheeta:Mouse Rat:Cheeta,How many feet are on a football field?:50:100:300:330:330";
+        String receivedMessage = "How many sides are there in a square?:1:2:3:4:4,Select the fastest animal:Hippo:Giraffe:Cheeta:Mouse Rat:Cheeta,How many feet are on a football field?:50:100:300:330:330,How many pairs are in 10?:2:4:6:5:5";
         setupQuiz(receivedMessage);
 
         b.setOnClickListener(new View.OnClickListener() { //start quiz button listener
@@ -240,7 +235,5 @@ public class Quiz extends AppCompatActivity {
                 startActivity(intent);
             }
         });//mainMenuB onClickListener
-
-
     }//end onCreate
 }
