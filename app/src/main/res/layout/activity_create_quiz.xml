@@ -132,9 +132,21 @@
         android:textColor="@android:color/black"
         android:layout_marginLeft="40dp"
         android:layout_marginBottom="15dp"
-        android:focusable="false" />
+        android:maxLength="60" />
 
-        <EditText
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/aRadio"
+                android:layout_marginLeft="20dp" />
+
+            <EditText
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="4"
@@ -148,9 +160,23 @@
             android:layout_marginLeft="40dp"
             android:hint="A. "
             android:layout_width="200dp"
-            android:focusable="false" />
+                android:maxLength="30" />
 
-        <EditText
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bRadio" />
+
+            <EditText
             android:layout_height="wrap_content"
         android:inputType="textPersonName"
             android:ems="4"
@@ -163,9 +189,23 @@
             android:layout_marginLeft="40dp"
             android:hint="B.  "
             android:layout_width="200dp"
-            android:focusable="false" />
+                android:maxLength="30" />
 
-        <EditText
+            </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cRadio"
+                android:layout_marginLeft="20dp" />
+
+            <EditText
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="4"
@@ -178,9 +218,23 @@
             android:layout_marginLeft="40dp"
             android:hint="C. "
             android:layout_width="200dp"
-            android:focusable="false" />
+                android:maxLength="30" />
 
-        <EditText
+            </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dRadio"
+                android:layout_marginLeft="20dp" />
+
+            <EditText
             android:layout_height="wrap_content"
         android:inputType="textPersonName"
             android:ems="4"
@@ -194,24 +248,8 @@
             android:layout_marginLeft="40dp"
             android:hint="D. "
             android:layout_width="200dp"
-            android:focusable="false" />
-
-        <EditText
-        android:layout_width="145dp"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/answerCorrect"
-        android:editable="true"
-        android:textSize="14sp"
-        android:hint="Answer Letter"
-        android:layout_below="@+id/answerA"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="16dp"
-            android:layout_marginLeft="50dp"
-            android:textStyle="normal|italic"
-            android:focusable="false" />
+                android:maxLength="30" />
+            </LinearLayout>
 
     </LinearLayout>
 

@@ -22,7 +22,9 @@
         </activity>
         <activity android:name=".FacultyConnect" />
         <activity android:name=".Quiz" />
-        <activity android:name=".CreateQuiz"/>
+        <activity android:name=".CreateQuiz"
+            android:windowSoftInputMode="stateHidden"
+            />
     </application>
 
 </manifest>

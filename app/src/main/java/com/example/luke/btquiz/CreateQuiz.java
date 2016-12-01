@@ -9,26 +9,32 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class CreateQuiz extends AppCompatActivity {
 
 
+    //Declare Variables
     public Button createQuizButton;
     public TextView question1, question2, question3;
-    public EditText question4, answerA, answerB, answerC, answerD, answerCorrect; //Make your own
+    public EditText question4, answerA, answerB, answerC, answerD; //Make your own
+    public RadioButton aRadio, bRadio, cRadio, dRadio; //Make your own
     public CheckBox checkBox1, checkBox2, checkBox3,checkBox4;
     String question1String = "What is the blank of blank?";
     String question2String = "What much blank is in blank?";
     String question3String = "What is the blank on a blank?";
+    public boolean makeYourOwn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { //start onCreate
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_quiz);
 
+        //Instantiate variables
         createQuizButton = (Button) findViewById(R.id.createQuizButton);
 
         question1 = (TextView) findViewById(R.id.question1);
@@ -40,14 +46,18 @@ public class CreateQuiz extends AppCompatActivity {
         answerB = (EditText) findViewById(R.id.answerB);
         answerC = (EditText) findViewById(R.id.answerC);
         answerD = (EditText) findViewById(R.id.answerD);
-        answerCorrect = (EditText) findViewById(R.id.answerCorrect);
 
         checkBox1 = (CheckBox) findViewById(R.id.checkBox1);
         checkBox2 = (CheckBox) findViewById(R.id.checkBox2);
         checkBox3 = (CheckBox) findViewById(R.id.checkBox3);
         checkBox4 = (CheckBox) findViewById(R.id.checkBox4);
 
-        //Add section to fill questions
+        aRadio = (RadioButton) findViewById(R.id.aRadio);
+        bRadio = (RadioButton) findViewById(R.id.bRadio);
+        cRadio = (RadioButton) findViewById(R.id.cRadio);
+        dRadio = (RadioButton) findViewById(R.id.dRadio);
+
+        //Set up widgets
         String questionString = question1String +"<br><br><b>A. 1</b>    B. 2     C. 3     D. 4";
         question1.setText(Html.fromHtml(questionString));
         questionString = question2String +"<br><br>A. 1     <b>B. 2</b>     C. 3     D. 4";
@@ -56,41 +66,145 @@ public class CreateQuiz extends AppCompatActivity {
         question3.setText(Html.fromHtml(questionString));
 
 
-        createQuizButton.setOnClickListener(new View.OnClickListener() {
+        aRadio.setOnClickListener(new View.OnClickListener() { //start aRadio onClick
+            @Override
+            public void onClick(View view) {
+                if(bRadio.isChecked())
+                    bRadio.setChecked(false);
+                if(cRadio.isChecked())
+                    cRadio.setChecked(false);
+                if(dRadio.isChecked())
+                    dRadio.setChecked(false);
+            }
+        }); //end aRadio onClick
+
+        bRadio.setOnClickListener(new View.OnClickListener() { //start bRadio onClick
+            @Override
+            public void onClick(View view) {
+                if(aRadio.isChecked())
+                    aRadio.setChecked(false);
+                if(cRadio.isChecked())
+                    cRadio.setChecked(false);
+                if(dRadio.isChecked())
+                    dRadio.setChecked(false);
+            }
+        }); //end bRadio onClick
+
+        cRadio.setOnClickListener(new View.OnClickListener() { //start cRadio onClick
+            @Override
+            public void onClick(View view) {
+                if(aRadio.isChecked())
+                    aRadio.setChecked(false);
+                if(bRadio.isChecked())
+                    bRadio.setChecked(false);
+                if(dRadio.isChecked())
+                    dRadio.setChecked(false);
+            }
+        }); //end cRadio onClick
+
+        dRadio.setOnClickListener(new View.OnClickListener() { //start dRadio onClick
+            @Override
+            public void onClick(View view) {
+                if(aRadio.isChecked())
+                    aRadio.setChecked(false);
+                if(bRadio.isChecked())
+                    bRadio.setChecked(false);
+                if(cRadio.isChecked())
+                    cRadio.setChecked(false);
+            }
+        }); //end dRadio onClick
+
+        checkBox4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { //start make your own question checkbox
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                {
+                    question4.setClickable(true);
+//                    answerA.setClickable(true);
+//                    answerB.setClickable(true);
+//                    answerC.setClickable(true);
+//                    answerD.setClickable(true);
+                    aRadio.setClickable(true);
+                    bRadio.setClickable(true);
+                    cRadio.setClickable(true);
+                    dRadio.setClickable(true);
+                }
+                else
+                {
+                        question4.setClickable(false);
+//                        answerA.setClickable(false);
+//                        answerB.setClickable(false);
+//                        answerC.setClickable(false);
+//                        answerD.setClickable(false);
+                        aRadio.setClickable(false);
+                        bRadio.setClickable(false);
+                        cRadio.setClickable(false);
+                        dRadio.setClickable(false);
+                }
+                makeYourOwn = b;
+
+            }
+        }); //end  make your own question checkbox
+
+        createQuizButton.setOnClickListener(new View.OnClickListener() { //start createQuiz button onClick
             @Override
             public void onClick(View view) {
                 //When button is clicked...
                 String quiz2Send = new String("");
                 String answers = "A. 1:B. 2:C. 3:D. 4";
+                boolean continueOn = true;
+
                 if(checkBox1.isChecked())
                     quiz2Send += question1String +":" +answers +":A,";
                 if(checkBox2.isChecked())
                     quiz2Send += question2String +":" +answers +":B,";
                 if(checkBox3.isChecked())
                     quiz2Send += question3String +":" +answers +":C,";
-                if(checkBox4.isChecked()) {
+                if(makeYourOwn) {
                     String myoQuestion = question4.getText().toString();
+                    if(myoQuestion == "")
+                        continueOn = false;
+
                     String myoAnswer = new String("");
-                    myoAnswer += ":" +answerA.getText().toString() +":" +answerB.getText().toString() +":" +answerC.getText().toString() +":" +answerD.getText().toString() +":" +answerCorrect.getText().toString();
+
+                    String answerCorrect = "";
+                    if(aRadio.isChecked())
+                        answerCorrect = answerA.getText().toString();
+                    else if(bRadio.isChecked())
+                        answerCorrect = answerB.getText().toString();
+                    else if(cRadio.isChecked())
+                        answerCorrect = answerC.getText().toString();
+                    else if(dRadio.isChecked())
+                        answerCorrect = answerD.getText().toString();
+                    else
+                        continueOn = false;
+
+                    myoAnswer += ":" +answerA.getText().toString() +":" +answerB.getText().toString() +":" +answerC.getText().toString() +":" +answerD.getText().toString() +":" +answerCorrect;
+
+                    if(myoAnswer == "")
+                        continueOn = false;
+
                     quiz2Send += myoQuestion + myoAnswer;
                 }
 
                 //Log.e("",quiz2Send);
 
                 Context c = getApplicationContext();
-                Toast.makeText(c,"Quiz successfully created",Toast.LENGTH_LONG).show();
+                if(continueOn) {
+                    Toast.makeText(c, "Quiz successfully created", Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(CreateQuiz.this, FacultyConnect.class);
-                intent.putExtra("quiz",quiz2Send);
-                startActivity(intent);
+                    Intent intent = new Intent(CreateQuiz.this, FacultyConnect.class);
+                    intent.putExtra("quiz", quiz2Send);
+                    startActivity(intent);
 
-                /* To get the quiz string from the intent in FacultyConnect.java
-                Bundle bundle = getIntent().getExtras();
-                String quiz = bundle.getString("quiz");
-                 */
-
+                    /* To get the quiz string from the intent in FacultyConnect.java
+                    Bundle bundle = getIntent().getExtras();
+                    String quiz = bundle.getString("quiz");
+                     */
+                }
+                else
+                    Toast.makeText(c, "More information needed", Toast.LENGTH_LONG).show();
             }
-        });
-
+        });  //end createQuiz button onClick
     }//end onCreate
 }
