@@ -1,5 +1,6 @@
 package com.example.luke.btquiz;
 
+import android.content.ClipData;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.bluetooth.BluetoothAdapter;
@@ -7,6 +8,9 @@ import android.content.Intent;
 import android.view.View;
 import android.bluetooth.BluetoothDevice;
 import java.util.Set;
+import java.util.logging.Handler;
+
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.content.Context;
 import android.content.BroadcastReceiver;
@@ -18,17 +22,22 @@ import android.widget.Toast;
 public class FacultyConnect extends AppCompatActivity {
 
     private final static int REQUEST_ENABLE_BT = 1;
+    public final android.os.Handler handle;;
     BluetoothAdapter mBluetoothAdapter;
     ListView mListView;
     ArrayAdapter<String> mArrayAdapter;
     Set<BluetoothDevice> pairedDevices;
     IntentFilter filter;
+    String quiz;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faculty_connect);
+
+        Bundle bundle = getIntent().getExtras();
+        quiz = bundle.getString("quiz");
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mListView = (ListView) findViewById(R.id.listOfDevices);
@@ -46,6 +55,25 @@ public class FacultyConnect extends AppCompatActivity {
         find();
 
         mListView.setAdapter(mArrayAdapter);
+
+        //Start Luke's edits
+        mListView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                BluetoothDevice choice = (BluetoothDevice) adapterView.getItemAtPosition(i);
+                BluetoothChatService sendBT = new BluetoothChatService(view.getContext(),handle);
+                sendBT.connect(choice,true);
+
+                byte[] quizB = quiz.getBytes();
+                sendBT.write(quizB);
+                //I think this should do it. I am tired though.
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });  //End Luke's edits
 
     } // end onCreate
 

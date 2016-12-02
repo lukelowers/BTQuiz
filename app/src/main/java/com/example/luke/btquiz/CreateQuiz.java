@@ -23,9 +23,9 @@ public class CreateQuiz extends AppCompatActivity {
     public EditText question4, answerA, answerB, answerC, answerD; //Make your own
     public RadioButton aRadio, bRadio, cRadio, dRadio; //Make your own
     public CheckBox checkBox1, checkBox2, checkBox3,checkBox4;
-    String question1String = "What is the blank of blank?";
-    String question2String = "What much blank is in blank?";
-    String question3String = "What is the blank on a blank?";
+    String question1String = "How many sides are there in a square?";
+    String question2String = "Select the fastest animal?";
+    String question3String = "How many feet are on a football field?";
     public boolean makeYourOwn;
 
     @Override
@@ -57,11 +57,11 @@ public class CreateQuiz extends AppCompatActivity {
         dRadio = (RadioButton) findViewById(R.id.dRadio);
 
         //Set up widgets
-        String questionString = question1String +"<br><br><b>A. 1</b>    B. 2     C. 3     D. 4";
+        String questionString = question1String +"<br><br>A. 1    B. 2     C. 3     <b>D. 4</b>";
         question1.setText(Html.fromHtml(questionString));
-        questionString = question2String +"<br><br>A. 1     <b>B. 2</b>     C. 3     D. 4";
+        questionString = question2String +"<br><br>A. Hippo     B. Giraffe     <b>C. Cheeta</b>     D. Mouse Rat";
         question2.setText(Html.fromHtml(questionString));
-        questionString = question3String +"<br><br>A. 1     B. 2     <b>C. 3</b>     D. 4";
+        questionString = question3String +"<br><br>A. 50     B. 100     C. 300     <b>D. 330</b>";
         question3.setText(Html.fromHtml(questionString));
 
         aRadio.setOnClickListener(new View.OnClickListener() { //start aRadio onClick
@@ -184,11 +184,6 @@ public class CreateQuiz extends AppCompatActivity {
                     Intent intent = new Intent(CreateQuiz.this, FacultyConnect.class);
                     intent.putExtra("quiz", quiz2Send);
                     startActivity(intent);
-
-                    /* To get the quiz string from the intent in FacultyConnect.java
-                    Bundle bundle = getIntent().getExtras();
-                    String quiz = bundle.getString("quiz");
-                     */
                 }
                 else
                     Toast.makeText(c, "More information needed", Toast.LENGTH_LONG).show();

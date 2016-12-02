@@ -202,7 +202,7 @@ public class Quiz extends AppCompatActivity {
 
         //This is the string that you get from faculty
         //The tabs are suppose to by added as you add questions but it's not working for more than 2 questions right now.
-        String receivedMessage = "How many sides are there in a square?:1:2:3:4:4,Select the fastest animal:Hippo:Giraffe:Cheeta:Mouse Rat:Cheeta,How many feet are on a football field?:50:100:300:330:330,How many pairs are in 10?:2:4:6:5:5";
+        String receivedMessage = "How many sides are there in a square?:1:2:3:4:4,Select the fastest animal:Hippo:Giraffe:Cheeta:Mouse Rat:Cheeta,How many feet are on a football field?:50:100:300:330:330";
         setupQuiz(receivedMessage);
 
         b.setOnClickListener(new View.OnClickListener() { //start quiz button listener
