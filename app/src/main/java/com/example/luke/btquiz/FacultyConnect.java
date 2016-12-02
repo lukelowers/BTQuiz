@@ -22,7 +22,7 @@ import android.widget.Toast;
 public class FacultyConnect extends AppCompatActivity {
 
     private final static int REQUEST_ENABLE_BT = 1;
-    public final android.os.Handler handle;;
+    public android.os.Handler handle;
     BluetoothAdapter mBluetoothAdapter;
     ListView mListView;
     ArrayAdapter<String> mArrayAdapter;
@@ -60,6 +60,7 @@ public class FacultyConnect extends AppCompatActivity {
         mListView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                handle = new android.os.Handler();
                 BluetoothDevice choice = (BluetoothDevice) adapterView.getItemAtPosition(i);
                 BluetoothChatService sendBT = new BluetoothChatService(view.getContext(),handle);
                 sendBT.connect(choice,true);
