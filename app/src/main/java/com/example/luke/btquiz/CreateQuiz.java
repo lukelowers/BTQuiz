@@ -181,7 +181,7 @@ public class CreateQuiz extends AppCompatActivity {
 
                 Context c = getApplicationContext();
                 if(continueOn) {
-                    Toast.makeText(c, "Quiz successfully created", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(c, "Quiz successfully created", Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(CreateQuiz.this, FacultyConnect.class);
                     intent.putExtra("quiz", quiz2Send);

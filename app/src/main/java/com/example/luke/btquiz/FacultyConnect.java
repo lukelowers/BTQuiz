@@ -49,8 +49,8 @@ public class FacultyConnect extends AppCompatActivity {
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }
 
-        list();
         find();
+        list();
 
         mListView.setAdapter(mArrayAdapter);
 
