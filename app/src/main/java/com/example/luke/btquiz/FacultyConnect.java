@@ -18,7 +18,6 @@ import android.content.IntentFilter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-
 public class FacultyConnect extends AppCompatActivity {
 
     private final static int REQUEST_ENABLE_BT = 1;
@@ -51,7 +50,6 @@ public class FacultyConnect extends AppCompatActivity {
         }
 
         list();
-
         find();
 
         mListView.setAdapter(mArrayAdapter);
@@ -77,9 +75,6 @@ public class FacultyConnect extends AppCompatActivity {
         });  //End Luke's edits
 
     } // end onCreate
-
-
-
 
     public void list(){
 
@@ -143,14 +138,6 @@ public class FacultyConnect extends AppCompatActivity {
         // Unregister broadcast listeners
         this.unregisterReceiver(mReceiver);
     }
-
-
-
-
-
-
-
-
 
 }
 

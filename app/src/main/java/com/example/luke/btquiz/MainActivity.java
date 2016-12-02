@@ -10,7 +10,6 @@ public class MainActivity extends AppCompatActivity {
 
     int i = 5;
 
-
     private Button student;
     private Button faculty;
 
@@ -18,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         activitySwitch();
     }
@@ -44,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
 
     }
 }

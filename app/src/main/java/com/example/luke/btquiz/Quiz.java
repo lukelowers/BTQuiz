@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 public class Quiz extends AppCompatActivity {
 
-
     Intent discoverableIntent;
     public ProgressBar spinner;
     public TextView titleText, question1, question2, question3, question4;

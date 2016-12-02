@@ -141,15 +141,14 @@ public class CreateQuiz extends AppCompatActivity {
             public void onClick(View view) {
                 //When button is clicked...
                 String quiz2Send = new String("");
-                String answers = "A. 1:B. 2:C. 3:D. 4";
                 boolean continueOn = true;
 
                 if(checkBox1.isChecked())
-                    quiz2Send += question1String +":" +answers +":A,";
+                    quiz2Send += question1String +":1:2:3:4:4,";
                 if(checkBox2.isChecked())
-                    quiz2Send += question2String +":" +answers +":B,";
+                    quiz2Send += question2String +":Hippo:Giraffe:Cheeta:Mouse Rat:Cheeta,";
                 if(checkBox3.isChecked())
-                    quiz2Send += question3String +":" +answers +":C,";
+                    quiz2Send += question3String +":50:100:300:330:330,";
                 if(makeYourOwn) {
                     String myoQuestion = question4.getText().toString();
                     if(myoQuestion == "")
@@ -175,6 +174,9 @@ public class CreateQuiz extends AppCompatActivity {
                         continueOn = false;
 
                     quiz2Send += myoQuestion + myoAnswer;
+
+                    if(quiz2Send == "")
+                        continueOn = false;
                 }
 
                 Context c = getApplicationContext();
