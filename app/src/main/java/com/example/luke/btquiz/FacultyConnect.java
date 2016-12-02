@@ -16,12 +16,14 @@ import android.content.Context;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class FacultyConnect extends AppCompatActivity {
 
     private final static int REQUEST_ENABLE_BT = 1;
     public android.os.Handler handle;
+    public TextView textView;
     BluetoothAdapter mBluetoothAdapter;
     ListView mListView;
     ArrayAdapter<String> mArrayAdapter;
@@ -38,6 +40,7 @@ public class FacultyConnect extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         quiz = bundle.getString("quiz");
 
+        textView = (TextView) findViewById(R.id.textView);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mListView = (ListView) findViewById(R.id.listOfDevices);
         mArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
@@ -49,8 +52,9 @@ public class FacultyConnect extends AppCompatActivity {
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }
 
-        find();
         list();
+        find();
+
 
         mListView.setAdapter(mArrayAdapter);
 
@@ -94,13 +98,15 @@ public class FacultyConnect extends AppCompatActivity {
     public void find(){
 
         if (mBluetoothAdapter.isDiscovering()) {
-            Toast.makeText(getApplicationContext(),"Bluetooth is discovering devices",
+            Toast.makeText(getApplicationContext(),"Bluetooth discovering devices",
                     Toast.LENGTH_LONG).show();
+            textView.setText("No longer discovering devices...");
             mBluetoothAdapter.cancelDiscovery();
         }
         else {
             mArrayAdapter.clear();
             mBluetoothAdapter.startDiscovery();
+            textView.setText("Bluetooth is discovering devices...");
             // Register the BroadcastReceiver
             //TODO: Don't forget to unregister during onDestroy
             registerReceiver(mReceiver, filter);
@@ -138,6 +144,4 @@ public class FacultyConnect extends AppCompatActivity {
         // Unregister broadcast listeners
         this.unregisterReceiver(mReceiver);
     }
-
 }
-
