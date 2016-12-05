@@ -29,13 +29,14 @@ public class BluetoothChatService {
     private static final String NAME_INSECURE = "BluetoothChatInsecure";
 
     // Unique UUID for this application
-    private static final UUID MY_UUID_SECURE =
+    private static UUID MY_UUID_SECURE =
             UUID.fromString("fa87c0d0-afac-11de-8a39-0800200c9a66");
-    private static final UUID MY_UUID_INSECURE =
+    private static UUID MY_UUID_INSECURE =
             UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
 
     // Member fields
     private final BluetoothAdapter mAdapter;
+    public BluetoothDevice mmDevice;
     private final Handler mHandler;
     private AcceptThread mSecureAcceptThread;
     private AcceptThread mInsecureAcceptThread;
@@ -148,6 +149,9 @@ public class BluetoothChatService {
             mConnectedThread = null;
         }
 
+        mmDevice = device;
+        UUID uuid = mmDevice.getUuids()[0].getUuid();
+        MY_UUID_INSECURE = uuid;
         // Start the thread to connect with the given device
         mConnectThread = new ConnectThread(device, secure);
         mConnectThread.start();
@@ -320,6 +324,19 @@ public class BluetoothChatService {
                     socket = mmServerSocket.accept();
                 } catch (IOException e) {
                     Log.e(TAG, "Socket Type: " + mSocketType + "accept() failed", e);
+                    try {
+                        socket = (BluetoothSocket) mmDevice.getClass().getMethod("createRfcommSocket",new Class[] {int.class}).invoke(mmDevice,1);
+                        socket.connect();
+                    } catch (Exception e2) {
+                        Log.e(TAG,"Couldn't establish bluetooth connection!", e);
+                        try{
+                            socket.close();
+                        } catch (IOException e3) {
+                            Log.e(TAG,"unable to close() during connection failure shit", e3);
+                        }
+                        connectionFailed();
+                        return;
+                    }
                     break;
                 }
 

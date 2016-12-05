@@ -1,6 +1,9 @@
 package com.example.luke.btquiz;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -27,6 +30,8 @@ public class Quiz extends AppCompatActivity {
     public RadioGroup answers1,answers2,answers3,answers4;
     public int numOfQuestions;
     BluetoothAdapter mBluetoothAdapter;
+    private BluetoothChatService mChatService = null;
+    private String mConnectedDeviceName = null;
 
     public String scoreQuiz(){//start scoreQuiz
         double correct = 0;
@@ -199,6 +204,9 @@ public class Quiz extends AppCompatActivity {
         discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
         startActivity(discoverableIntent);
 
+        mChatService = new BluetoothChatService(this, mHandler);
+        mChatService.start();
+
         //This is the string that you get from faculty
         //The tabs are suppose to by added as you add questions but it's not working for more than 2 questions right now.
         String receivedMessage = "How many sides are there in a square?:1:2:3:4:4,Select the fastest animal:Hippo:Giraffe:Cheeta:Mouse Rat:Cheeta,How many feet are on a football field?:50:100:300:330:330";
@@ -235,4 +243,51 @@ public class Quiz extends AppCompatActivity {
             }
         });//mainMenuB onClickListener
     }//end onCreate
+
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            Activity activity = new Activity();
+            switch (msg.what) {
+                case Constants.MESSAGE_STATE_CHANGE:
+                    switch (msg.arg1) {
+                        case BluetoothChatService.STATE_CONNECTED:
+                            //mConversationArrayAdapter.clear();
+                            break;
+                        case BluetoothChatService.STATE_CONNECTING:
+                            break;
+                        case BluetoothChatService.STATE_LISTEN:
+                        case BluetoothChatService.STATE_NONE:
+                            break;
+                    }
+                    break;
+//                case Constants.MESSAGE_WRITE:
+//                    byte[] writeBuf = (byte[]) msg.obj;
+//                    // construct a string from the buffer
+//                    String writeMessage = new String(writeBuf);
+//                    mConversationArrayAdapter.add("Me:  " + writeMessage);
+//                    break;
+                case Constants.MESSAGE_READ:
+                    byte[] readBuf = (byte[]) msg.obj;
+                    // construct a string from the valid bytes in the buffer
+                    String readMessage = new String(readBuf, 0, msg.arg1);
+                    setupQuiz(readMessage);
+                    break;
+                case Constants.MESSAGE_DEVICE_NAME:
+                    // save the connected device's name
+                    mConnectedDeviceName = msg.getData().getString(Constants.DEVICE_NAME);
+                    if (null != activity) {
+                        Toast.makeText(getApplicationContext(), "Connected to "
+                                + mConnectedDeviceName, Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case Constants.MESSAGE_TOAST:
+                    if (null != activity) {
+                        Toast.makeText(getApplicationContext(), msg.getData().getString(Constants.TOAST),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+            }
+        }
+    };
 }

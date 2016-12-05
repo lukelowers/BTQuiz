@@ -193,3 +193,7 @@ public class CreateQuiz extends AppCompatActivity {
         });  //end createQuiz button onClick
     }//end onCreate
 }
+
+
+//Bundle bundle = getIntent().getExtras();
+//quiz = bundle.getString("quiz");
