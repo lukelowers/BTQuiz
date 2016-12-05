@@ -205,7 +205,7 @@ public class Quiz extends AppCompatActivity {
         startActivity(discoverableIntent);
 
         mChatService = new BluetoothChatService(this, mHandler);
-        mChatService.start();
+        //mChatService.start();
 
         //This is the string that you get from faculty
         //The tabs are suppose to by added as you add questions but it's not working for more than 2 questions right now.
