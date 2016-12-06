@@ -13,6 +13,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -92,7 +93,11 @@ public class FacultyConnect extends AppCompatActivity {
                 String[] split = choice.split("\n");
                 String device = split[1];
                 Toast.makeText(getApplicationContext(), split[0] +" selected", Toast.LENGTH_SHORT).show();
-                connectDevice(device);
+                try {
+                    if(device != null) {
+                        connectDevice(device);
+                    }}
+                catch (NullPointerException e) {Log.e("Exception: ", "" +e +"\nDevice Name: " +device); }
             }
         });
 
@@ -174,6 +179,10 @@ public class FacultyConnect extends AppCompatActivity {
         } else if (mChatService == null) {
             setupChat();
         }
+        if((mChatService != null) && (mChatService.getState() != 0)) {
+            mChatService.stop();
+        }
+
     }
 
     @Override
@@ -182,24 +191,24 @@ public class FacultyConnect extends AppCompatActivity {
         if (mChatService != null) {
             mChatService.stop();
         }
-        //registerReceiver(null,null);
+        unregisterReceiver(mReceiver);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        // Performing this check in onResume() covers the case in which BT was
-        // not enabled during onStart(), so we were paused to enable it...
-        // onResume() will be called when ACTION_REQUEST_ENABLE activity returns.
-        if (mChatService != null) {
-            // Only if the state is STATE_NONE, do we know that we haven't started already
-            if (mChatService.getState() == BluetoothChatService.STATE_NONE) {
-                // Start the Bluetooth chat services
-                mChatService.start();
-            }
-        }
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//
+//        // Performing this check in onResume() covers the case in which BT was
+//        // not enabled during onStart(), so we were paused to enable it...
+//        // onResume() will be called when ACTION_REQUEST_ENABLE activity returns.
+//        if (mChatService != null) {
+//            // Only if the state is STATE_NONE, do we know that we haven't started already
+//            if (mChatService.getState() == BluetoothChatService.STATE_NONE) {
+//                // Start the Bluetooth chat services
+//                mChatService.start();
+//            }
+//        }
+//    }
 
     private void setupChat() {
 
@@ -290,7 +299,7 @@ public class FacultyConnect extends AppCompatActivity {
         BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
         // Attempt to connect to the device
         mChatService.connect(device, false);
-        Set devs = mBluetoothAdapter.getBondedDevices();
+        //Set devs = mBluetoothAdapter.getBondedDevices();
         //if (devs.contains(device)) {
             //Toast.makeText(this, "Successfully paired", Toast.LENGTH_SHORT).show();
             //sendMessage(quiz);
