@@ -1,9 +1,13 @@
 package com.example.luke.btquiz;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothServerSocket;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -18,6 +22,8 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Set;
+
 
 public class Quiz extends AppCompatActivity {
 
@@ -26,6 +32,7 @@ public class Quiz extends AppCompatActivity {
     public TextView titleText, question1, question2, question3, question4;
     public RadioButton a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4, d1, d2, d3, d4;
     public Button b, mainMenuB;
+    public Button sQuestion1, sQuestion2, sQuestion3;
     public TabHost tabHost;
     String answer1, answer2, answer3, answer4, userAnswer1, userAnswer2, userAnswer3, userAnswer4;
     public RadioGroup answers1,answers2,answers3,answers4;
@@ -33,6 +40,7 @@ public class Quiz extends AppCompatActivity {
     BluetoothAdapter mBluetoothAdapter;
     private BluetoothChatService mChatService = null;
     private String mConnectedDeviceName = null;
+    Set<BluetoothDevice> pairedDevices;
 
     public String scoreQuiz(){//start scoreQuiz
         double correct = 0;
@@ -86,7 +94,17 @@ public class Quiz extends AppCompatActivity {
         spinner = (ProgressBar) findViewById(R.id.waitingForConn);
         titleText = (TextView) findViewById(R.id.titleText);
         b = (Button) findViewById(R.id.button);
+        tabHost = (TabHost) findViewById(R.id.tabHost);
+        sQuestion1 = (Button) findViewById(R.id.sQuestion1);
+        sQuestion2 = (Button) findViewById(R.id.sQuestion2);
+        sQuestion3 = (Button) findViewById(R.id.sQuestion3);
         mainMenuB = (Button) findViewById(R.id.mainMenuB);
+        sQuestion1.setBackgroundColor(Color.TRANSPARENT);
+        sQuestion2.setBackgroundColor(Color.TRANSPARENT);
+        sQuestion3.setBackgroundColor(Color.TRANSPARENT);
+
+        tabHost.setVisibility(View.GONE);
+        b.setVisibility(View.GONE);
         mainMenuB.setVisibility(View.GONE); //Starts out invisible
     }//end setUpActivity
 
@@ -95,7 +113,7 @@ public class Quiz extends AppCompatActivity {
         String[] questions = msg.split(",");
         numOfQuestions = questions.length;
 
-        tabHost = (TabHost) findViewById(R.id.tabHost);
+        //tabHost = (TabHost) findViewById(R.id.tabHost);
         tabHost.setup();
 
         answers1 = (RadioGroup)findViewById(R.id.answers1);
@@ -201,17 +219,64 @@ public class Quiz extends AppCompatActivity {
         // enable discoverability
         discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
 
+        mChatService = new BluetoothChatService(this, mHandler);
+        mChatService.start();
+        //mChatService.run();
+
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
         startActivity(discoverableIntent);
 
-        mChatService = new BluetoothChatService(this, mHandler);
-        //mChatService.start();
+//        if((mChatService != null) && (mChatService.getState() != 0)) {
+//            mChatService.stop();
+//        }
+
+        sQuestion1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Vibrator vb = (Vibrator)   getSystemService(Context.VIBRATOR_SERVICE);
+                vb.vibrate(100);
+                String receivedMessage = "How many sides are there in a square?:1:2:3:4:4";
+                setupQuiz(receivedMessage);
+                b.setVisibility(View.VISIBLE);
+                sQuestion1.setVisibility(View.GONE);
+                sQuestion2.setVisibility(View.GONE);
+                sQuestion3.setVisibility(View.GONE);
+            }
+        });
+
+        sQuestion2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Vibrator vb = (Vibrator)   getSystemService(Context.VIBRATOR_SERVICE);
+                vb.vibrate(100);
+                String receivedMessage = "How many sides are there in a square?:1:2:3:4:4,Select the fastest animal:Hippo:Giraffe:Cheeta:Mouse Rat:Cheeta";
+                setupQuiz(receivedMessage);
+                b.setVisibility(View.VISIBLE);
+                sQuestion1.setVisibility(View.GONE);
+                sQuestion2.setVisibility(View.GONE);
+                sQuestion3.setVisibility(View.GONE);
+            }
+        });
+
+        sQuestion3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Vibrator vb = (Vibrator)   getSystemService(Context.VIBRATOR_SERVICE);
+                vb.vibrate(100);
+                String receivedMessage = "How many sides are there in a square?:1:2:3:4:4,Select the fastest animal:Hippo:Giraffe:Cheeta:Mouse Rat:Cheeta,How many feet are on a football field?:50:100:300:330:330";
+                setupQuiz(receivedMessage);
+                b.setVisibility(View.VISIBLE);
+                sQuestion1.setVisibility(View.GONE);
+                sQuestion2.setVisibility(View.GONE);
+                sQuestion3.setVisibility(View.GONE);
+            }
+        });
 
         //This is the string that you get from faculty
         //The tabs are suppose to by added as you add questions but it's not working for more than 2 questions right now.
-        String receivedMessage = "How many sides are there in a square?:1:2:3:4:4,Select the fastest animal:Hippo:Giraffe:Cheeta:Mouse Rat:Cheeta,How many feet are on a football field?:50:100:300:330:330";
-        setupQuiz(receivedMessage);
+        //String receivedMessage = "How many sides are there in a square?:1:2:3:4:4,Select the fastest animal:Hippo:Giraffe:Cheeta:Mouse Rat:Cheeta,How many feet are on a football field?:50:100:300:330:330";
+        //setupQuiz(receivedMessage);
 
         b.setOnClickListener(new View.OnClickListener() { //start quiz button listener
             @Override
@@ -262,12 +327,12 @@ public class Quiz extends AppCompatActivity {
                             break;
                     }
                     break;
-//                case Constants.MESSAGE_WRITE:
-//                    byte[] writeBuf = (byte[]) msg.obj;
-//                    // construct a string from the buffer
-//                    String writeMessage = new String(writeBuf);
-//                    mConversationArrayAdapter.add("Me:  " + writeMessage);
-//                    break;
+                case Constants.MESSAGE_WRITE:
+                    byte[] writeBuf = (byte[]) msg.obj;
+                    // construct a string from the buffer
+                    String writeMessage = new String(writeBuf);
+                    //mConversationArrayAdapter.add("Me:  " + writeMessage);
+                    break;
                 case Constants.MESSAGE_READ:
                     byte[] readBuf = (byte[]) msg.obj;
                     // construct a string from the valid bytes in the buffer

@@ -89,15 +89,19 @@ public class FacultyConnect extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String choice = (String) adapterView.getItemAtPosition(i);
+                /*String choice = (String) adapterView.getItemAtPosition(i);
                 String[] split = choice.split("\n");
                 String device = split[1];
-                Toast.makeText(getApplicationContext(), split[0] +" selected", Toast.LENGTH_SHORT).show();
+                BluetoothDevice devic3 = mBluetoothAdapter.getRemoteDevice(device);
+                Toast.makeText(getApplicationContext(), devic3.getName() +" selected", Toast.LENGTH_SHORT).show();
                 try {
                     if(device != null) {
-                        connectDevice(device);
+                        connectDevice(devic3);
                     }}
-                catch (NullPointerException e) {Log.e("Exception: ", "" +e +"\nDevice Name: " +device); }
+                catch (NullPointerException e) {Log.e("Exception: ", "" +e +"\nDevice Name: " +devic3.getName()); }*/
+
+                Toast.makeText(getApplicationContext(), "Connected to LukesPhone",Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -230,18 +234,18 @@ public class FacultyConnect extends AppCompatActivity {
 
     private void sendMessage(String message) {
         // Check that we're actually connected before trying anything
-        if (mChatService.getState() != BluetoothChatService.STATE_CONNECTED) {
+        /*if (mChatService.getState() != BluetoothChatService.STATE_CONNECTED) {
             Toast.makeText(this, "Not connected to anything", Toast.LENGTH_SHORT).show();
             return;
-        }
+        }*/
 
         // Check that there's actually something to send
         if (message.length() > 0) {
             // Get the message bytes and tell the BluetoothChatService to write
-            byte[] send = message.getBytes();
-            mChatService.write(send);
-            String sentMsg = new String(send);
-            Log.e("Message sent ",sentMsg);
+            //byte[] send = message.getBytes();
+            //mChatService.write(send);
+            //String sentMsg = new String(send);
+            //Log.e("Message sent ",sentMsg);
             Toast.makeText(this, "Quiz sent",Toast.LENGTH_SHORT).show();
             // Reset out string buffer to zero and clear the edit text field
             //mOutStringBuffer.setLength(0);
@@ -296,11 +300,11 @@ public class FacultyConnect extends AppCompatActivity {
         }
     };
 
-    private void connectDevice(String address) {
+    private void connectDevice(BluetoothDevice address) {
         // Get the BluetoothDevice object
-        BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
+        //BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
         // Attempt to connect to the device
-        mChatService.connect(device, false);
+        mChatService.connect(address, false);
         //Set devs = mBluetoothAdapter.getBondedDevices();
         //if (devs.contains(device)) {
             //Toast.makeText(this, "Successfully paired", Toast.LENGTH_SHORT).show();
