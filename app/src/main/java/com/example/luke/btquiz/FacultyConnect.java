@@ -240,6 +240,8 @@ public class FacultyConnect extends AppCompatActivity {
             // Get the message bytes and tell the BluetoothChatService to write
             byte[] send = message.getBytes();
             mChatService.write(send);
+            String sentMsg = new String(send);
+            Log.e("Message sent ",sentMsg);
             Toast.makeText(this, "Quiz sent",Toast.LENGTH_SHORT).show();
             // Reset out string buffer to zero and clear the edit text field
             //mOutStringBuffer.setLength(0);

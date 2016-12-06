@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.bluetooth.BluetoothAdapter;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -272,17 +273,19 @@ public class Quiz extends AppCompatActivity {
                     // construct a string from the valid bytes in the buffer
                     String readMessage = new String(readBuf, 0, msg.arg1);
                     setupQuiz(readMessage);
+                    Log.e("Message Received: ",readMessage);
+                    Toast.makeText(getApplicationContext(), "Quiz received", Toast.LENGTH_SHORT).show();
                     break;
                 case Constants.MESSAGE_DEVICE_NAME:
                     // save the connected device's name
                     mConnectedDeviceName = msg.getData().getString(Constants.DEVICE_NAME);
-                    if (null != activity) {
+                    if (activity != null) {
                         Toast.makeText(getApplicationContext(), "Connected to "
                                 + mConnectedDeviceName, Toast.LENGTH_SHORT).show();
                     }
                     break;
                 case Constants.MESSAGE_TOAST:
-                    if (null != activity) {
+                    if (activity != null) {
                         Toast.makeText(getApplicationContext(), msg.getData().getString(Constants.TOAST),
                                 Toast.LENGTH_SHORT).show();
                     }
