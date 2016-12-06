@@ -284,6 +284,7 @@ public class Quiz extends AppCompatActivity {
                 Context c = getApplicationContext();
 
                 if(spinner.getVisibility() == View.VISIBLE) {
+                    spinner.setVisibility(View.GONE);
                     startQuiz();
                     Toast.makeText(c, "Your quiz has started", Toast.LENGTH_LONG).show();
                 }

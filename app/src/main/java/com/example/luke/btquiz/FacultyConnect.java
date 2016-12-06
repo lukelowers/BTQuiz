@@ -99,7 +99,11 @@ public class FacultyConnect extends AppCompatActivity {
                         connectDevice(devic3);
                     }}
                 catch (NullPointerException e) {Log.e("Exception: ", "" +e +"\nDevice Name: " +devic3.getName()); }*/
-
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 Toast.makeText(getApplicationContext(), "Connected to LukesPhone",Toast.LENGTH_SHORT).show();
 
             }
